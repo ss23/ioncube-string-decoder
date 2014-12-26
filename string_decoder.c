@@ -1,0 +1,56 @@
+#include <stdio.h>
+
+int main(int argc, char * argv[]) {
+	/* Extracted from 5.6 ioncube loader */
+	char encryption_data[] = {
+		0x25,
+		0x68,
+		0xd3,
+		0xc2,
+		0x28,
+		0xf2,
+		0x59,
+		0x2e,
+		0x94,
+		0xee,
+		0xf2,
+		0x91,
+		0xac,
+		0x13,
+		0x96,
+		0x95
+	};
+
+	/* Replace with your dataz. Remember not to include the 0x00 at the end */
+	char encrypted_string[] = {
+		0x9b,
+		0x36,
+		0x40,
+		0xd7,
+		0x9b,
+		0x90,
+		0xf4,
+		0x8c,
+		0x56,
+		0xe0,
+		0xf0,
+		0x4b,
+		0x1c,
+		0xf3,
+		0x8a,
+		0x49,
+		0x9c,
+		0x3d,
+		0x42,
+		0xf1,
+		0x9c,
+		0xf2
+	};
+
+	int size = sizeof(encrypted_string);
+	for (int i = 0; i < size; i++) {
+		encrypted_string[i] = encrypted_string[i] ^ encryption_data[(size + i - 1) % sizeof(encryption_data)];
+	}
+
+	printf("%s\r\n", encrypted_string);
+}
